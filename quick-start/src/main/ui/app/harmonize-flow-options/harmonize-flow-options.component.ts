@@ -15,6 +15,7 @@ import { SearchService } from '../search/search.service';
 import { SelectKeyValuesComponent } from '../select-key-values/select-key-values.component';
 import { MapService } from '../map/map.service';
 import { MdlDialogService } from '@angular-mdl/core';
+import { PropertyType } from '../entities';
 
 @Component({
   selector: 'app-harmonize-flow-options',
@@ -25,7 +26,8 @@ export class HarmonizeFlowOptionsComponent implements OnInit, OnChanges {
 
   @Input() flow: Flow;
   @Output() onChange = new EventEmitter<any>();
-  @Output() onRun: EventEmitter<any> = new EventEmitter();;
+  @Input() property: PropertyType;
+  @Output() onRun: EventEmitter<any> = new EventEmitter();
 
   static readonly newLabel: string = 'New...';
 
@@ -185,6 +187,15 @@ export class HarmonizeFlowOptionsComponent implements OnInit, OnChanges {
     },
     () => {},
     () => {});
+  }
+
+  get invalidString(): boolean
+  {
+    if(this.property.name.indexOf(" ") != -1)
+    {
+      return true;
+    }
+    return false;
   }
 
 }

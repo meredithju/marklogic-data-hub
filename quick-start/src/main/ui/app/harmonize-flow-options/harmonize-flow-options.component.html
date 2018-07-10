@@ -51,9 +51,15 @@
         (onChange)="updateKayVals($event)"
         (onRemove)="saveSettings()"
       ></app-select-key-values>
-</div>
-    <div>
-      <mdl-button mdl-button-type="raised" mdl-colored="primary" mdl-ripple (click)="runHarmonize()">Run Harmonize</mdl-button>
     </div>
+    <div *ngIf="property.invalidString; else noWhitespace">
+      <span class="has-whitespace">Whitespaces are not allowed in property names</span>
+      <div>
+        <button class="mdl-button mdl-js-button mdl-button--raised" disabled>Run Harmonize</button>
+      </div>
+    </div>
+    <ng-template #noWhitespace>
+     <mdl-button mdl-button-type="raised" mdl-colored="primary" mdl-ripple (click)="runHarmonize()">Run Harmonize</mdl-button>
+    </ng-template>
   </div>
 </ng-template>
